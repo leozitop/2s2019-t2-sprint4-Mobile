@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Image, StyleSheet} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
 class Main extends Component {
   // apresentar a lista de eventos
+
+  static navigationOptions = {
+    tabBarIcon: () => (
+      <Image
+        source={require('../assets/img/calendar.png')}
+        style={styles.tabNavigatorIcon}
+      />
+    )
+  }
 
   constructor() {
     super();
@@ -40,5 +49,9 @@ class Main extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  tabNavigatorIcon: {width: 25, height: 25, tintColor: 'white'}
+})
 
 export default Main;
