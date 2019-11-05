@@ -21,7 +21,7 @@ namespace Senai.Roman.WebApi.Controllers
         {
             ProjetosRepository = new ProjetosRepository();
         }
-
+        [HttpGet]
         public IActionResult Listar()
         {
             return Ok(ProjetosRepository.Listar());
