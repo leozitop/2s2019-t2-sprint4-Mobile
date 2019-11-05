@@ -45,7 +45,7 @@ namespace Senai.Roman.WebApi.Domains
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Projetos)
-                    .HasForeignKey(d => d.IdProfessor)
+                    .HasForeignKey(d => d.IdUsuario)
                     .HasConstraintName("FK__Projetos__IdUser__5070F446");
 
                 entity.HasOne(d => d.IdTemaNavigation)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.Roman.WebApi.Domains;
@@ -22,11 +23,14 @@ namespace Senai.Roman.WebApi.Controllers
             ProjetosRepository = new ProjetosRepository();
         }
 
+        [HttpGet]
         public IActionResult Listar()
         {
             return Ok(ProjetosRepository.Listar());
         }
 
+        [Authorize(Roles = "PROFESSOR")]
+        [HttpPost]
         public IActionResult Cadastrar(Projetos projeto)
         {
             try

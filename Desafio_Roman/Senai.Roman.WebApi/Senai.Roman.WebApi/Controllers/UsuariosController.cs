@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.Roman.WebApi.Domains;
@@ -28,6 +29,7 @@ namespace Senai.Roman.WebApi.Controllers
             return Ok(UsuariosRepository.Listar());
         }
 
+        [Authorize(Roles = "PROFESSOR")]
         [HttpPost]
         public IActionResult Cadastrar(Usuarios usuario)
         {
