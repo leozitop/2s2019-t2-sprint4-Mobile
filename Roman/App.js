@@ -1,58 +1,90 @@
 import React, {Component} from 'react';
 import {Text, View, ScrollView, Image, StyleSheet} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      projetos : [],
+    };
+  }
+  componentDidMount() {
+    this._buscarListaProjetos();
+  }
+
+  _buscarListaProjetos = async () => {
+    await fetch('http://192.168.4.183:5000/api/projetos')
+      .then(resposta => resposta.json())
+      .then(data => this.setState({projetos: data}))
+      .catch(erro => console.warn(erro));
+  };
+  // _buscarListaUsuarios = async () => {
+  //   await fetch('http://192.168.4.183:5000/api/usuarios')
+  //   .then(resposta => resposta.json())
+  //   .then(data => this.setState({usuarios: data}))
+  //   .catch(erro => console.warn(erro));
+  // }
 render(){
 
   return (
-    <View>
-      <View  style={styles.fundo}>
+    
+      <View>
+        <View style={styles.banner}>
 
-      <Text style={styles.sectionTitle}>☭</Text>
-      </View>
-      <ScrollView>
-
-        <View>
-          <Text style={styles.letra}>Soyuz nyerushimij ryespublik svobodnykh
-Splotila navyeki vyelikaya Rus';
-Da zdravstvuyet sozdannyj volyej narodov
-Yedinyj, moguchij Sovyetskij Soyuz!
-
-Slav'sya, otyechyestvo
-Nashye svobodnoye,
-Druzhby narodov nadyozhnyj oplot!
-Partiya Lyenina
-Sila narodnaya
-Nas k torzhyestvu Kommunizma vyedyot!
-
-Skvoz' grozi siyalo
-Nam solntsye svobody
-I Lyenin vyelikij nam put' ozaril
-Na pravoye dyelo on podnyal narody
-Na trud i na podvigi nas vdokhnovil!
-
-Slav'sya, otyechyestvo
-Nashye svobodnoye
-Druzhby narodov nadyozhnyj oplot!
-Partiya Lyenina
-Sila narodnaya
-Nas k torzhyestvu Kommunizma vyedyot!
-
-V pobyedye byessmyertnykh idyej Kommunizma
-My vidim gryadussheye nashyej strany
-I krasnomu znamyeni slavnoj Otchizny
-My budyem vsyegda bezzavyetno vyerny!
-
-Slav'sya, otyechyestvo
-Nashye svobodnoye
-Druzhby narodov nadyozhnyj oplot!
-Partiya Lyenina
-Sila narodnaya
-Nas k torzhyestvu Kommunizma vyedyot!</Text>
+        <Text style={styles.titulo}>Roman ☭</Text>
         </View>
-</ScrollView>
-    </View>
+
+      {/* <FlatList
+        data={this.state.temas}
+        keyExtractor={item => item.idTema}
+        renderItem={({item}) => (
+          <View>
+            <Text style={styles.tema}>{item.tema}</Text>
+          </View>
+        )}
+        />
+        <Text>-----------------------------------------------</Text>
+        <FlatList
+        data={this.state.usuarios}
+        keyExtractor={item => item.idUsuario}
+        renderItem={({item}) => (
+          <View>
+            <Text>{item.nome}</Text>
+            <Text>{item.email}</Text>
+            <Text>{item.senha}</Text>
+            <Text>{item.permissao}</Text>
+            
+          </View>
+        )}
+        /> */}
+        <ScrollView>
+
+        <FlatList
+        style={styles.projetos}
+        data={this.state.projetos}
+        keyExtractor={item => item.idProjeto}
+        renderItem={({item}) => (
+          <View>
+            <Text>Id: {item.idProjeto}</Text>
+            <Text>Projeto: {item.Projeto}</Text>
+            <Text>Descrição: {item.descricao}</Text>
+            <Text>Tema: {item.idTema}</Text>
+            <Text>Usuario: {item.idUsuario}</Text>
+            <Text>------------------------------------------------------------------------------------------------------------</Text>
+
+
+          </View>
+        )
+      } 
+      />
+      </ScrollView>
+        </View>
+    
+      
+
+    
     
       
   );
@@ -61,16 +93,14 @@ Nas k torzhyestvu Kommunizma vyedyot!</Text>
 
 }
 const styles = StyleSheet.create({
-  sectionTitle: {
-    fontSize: 240,
-    color: 'yellow',
-    // color: Colors.yellow,
+  titulo: {
+    fontSize: 50,
   },
-  fundo: {
-    backgroundColor: 'red',
+  banner: {
+    backgroundColor: '#FF96F5'
   },
-  letra: {
-    fontSize: 30,
+  projetos: {
+    backgroundColor: '#B4FF96'
   }
 });
 export default App;
