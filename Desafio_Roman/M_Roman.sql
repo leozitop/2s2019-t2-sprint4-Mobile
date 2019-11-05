@@ -3,10 +3,6 @@ use M_Roman
 
 --DDL--
 
-create table Professores (
-IdProfessor int primary key identity, 
-Nome varchar(200));
-
 create table Usuarios (
 IdUsuario int primary key identity,
 Email varchar(200) unique not null,
@@ -25,7 +21,7 @@ Descricao varchar(200),
 IdUsuario int foreign key references Usuarios(IdUsuario),
 IdTema int foreign key references Temas(IdTema));
 
-drop table Usuarios;
+
 
 
 -- DML --
@@ -59,12 +55,12 @@ on Temas.IdTema = Projetos.IdTema
 -- DQL --
 
 SELECT Projetos.Projeto, Projetos.Descricao, Temas.Tema, 
-Professores.Nome
+Usuarios.Nome
 FROM Projetos
 FULL JOIN Temas
 ON Projetos.IdTema = Temas.IdTema
-FULL JOIN Professores
-ON	Professores.IdProfessor = Projetos.IdProfessor
+FULL JOIN Usuarios
+ON	Usuarios.IdUsuario = Projetos.IdUsuario
 
 select * from Usuarios
 
