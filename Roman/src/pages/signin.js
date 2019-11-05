@@ -33,7 +33,7 @@ export default class Signin extends Component{
         if (tokenRecebido != null) {
             try {
                 await AsyncStorage.setItem('@roman:token' + tokenRecebido);
-                this.props.navigation.navigate('AppNavigator');
+                this.props.navigation.navigate('MainNavigator');
             } catch (error) {
                 
             }
